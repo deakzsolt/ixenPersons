@@ -23,8 +23,8 @@
                     @foreach($data as $person)
                         <tr>
                             <td style="width: 150px; min-width: 150px; max-width: 150px;">
-                                <strong style="display: block">{{ $person->first_name }}</strong>
-                                <span style="font-size: 0.7rem">{{ $person->first_name }} {{ $person->middle_name }} {{ $person->last_name }}</span>
+                                #{{ $person->id }}<strong style="display: block">{{ $person->first_name }}</strong>
+                                <span style="font-size: 0.8rem">{{ $person->first_name }} {{ $person->middle_name }} {{ $person->last_name }}</span>
                             </td>
                             <td>
                                 <ol>
@@ -48,7 +48,7 @@
                                 </ol>
                             </td>
                             <td style="text-align: center">
-                                <a class="button" style="background-color: #406080; border-color: #406080; padding: 0.5rem; display: block;" href="#"><i style="color: #fff" class="fa-solid fa-pencil-alt"></i></a>
+                                <a href="{{ route('person.edit', $person) }}" class="button" style="background-color: #406080; border-color: #406080; padding: 0.5rem; display: inline-block; width:35px"><i style="color: #fff" class="fa-solid fa-pencil-alt"></i></a>
                                 <form action="{{ route('person.destroy', $person->id) }}" method="POST" onsubmit="return confirm('Are you sure to delete this person?');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

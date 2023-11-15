@@ -15,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::delete('person/destroy/{person}', 'App\Http\Controllers\Web\PersonController@destroy')->name('person.destroy');
-Route::resources(['/' => PersonController::class]);
+Route::get('person/{person}/edit', 'App\Http\Controllers\Web\PersonController@edit')->name('person.edit');
+Route::put('person/{person}/update', 'App\Http\Controllers\Web\PersonController@update')->name('person.update');
+Route::resource('/', PersonController::class)->except(
+    [
+        'edit',
+        'update',
+        'destroy',
+    ]
+);
