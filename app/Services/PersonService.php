@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class PersonService
 {
@@ -23,5 +26,23 @@ class PersonService
     public function list()
     {
         return $this->person->orderBy('id', 'desc')->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllPersons()
+    {
+        return $this->person->orderBy('id', 'desc')->with('PersonEmails', 'PersonMobiles', 'PersonTelephones')->get();
+    }
+
+    /**
+     * @param Person $person
+     *
+     * @return Builder|Builder[]|Collection|Model|null
+     */
+    public function getPerson(Person $person)
+    {
+        return $this->person->with('PersonEmails', 'PersonMobiles', 'PersonTelephones')->find($person->id);
     }
 }

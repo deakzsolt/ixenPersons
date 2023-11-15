@@ -40,3 +40,21 @@ When the migration is done we need to populate the database with example data, f
 php artisan db:seed
 ```
 TODO continue from here
+## Api rewuests
+
+Returns all person data. GET request
+```
+http://persons.local/api/list
+```
+Creates person. POST request
+```
+http://persons.local/api/create
+```
+Returns single person data. GET request
+```
+http://persons.local/api/edit/13
+```
+Deletes person and its relation data. GET request
+```
+http://persons.local/api/destroy/9
+```
