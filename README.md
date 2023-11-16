@@ -412,3 +412,10 @@ On missing person example:
   "message": "Record not found."
 }
 ```
+
+## Api requests test
+
+To test are the api requests working I have used Laravel built in Tester. I have set all api request in PersonApiTest and we can test it with the following command:
+```
+php artisan test
+```
