@@ -45,7 +45,7 @@ Visiting the home page of persons.local you can get a list of persons. There is 
 
 ## Api requests
 
-Returns all person data.
+### Returns all person data.
 ```
 http://persons.local/api/list
 Type: GET
@@ -219,7 +219,7 @@ Example:
   },
 ]
 ```
-Creates new person with data.
+### Creates new person with data.
 ```
 http://persons.local/api/create
 Type: POST
@@ -249,7 +249,7 @@ Error example:
     "status": 400
 }
 ```
-Returns single person data.
+### Returns single person data.
 In the request {person} expects person id.
 ```
 http://persons.local/api/edit/{person}
@@ -327,7 +327,7 @@ On missing person example:
   "message": "Record not found."
 }
 ```
-Updates single person data.
+### Updates single person data.
 In the request {person} expects person id.
 Response is the updated person data.
 ```
@@ -397,7 +397,7 @@ Error example:
     "status": 400
 }
 ```
-Deletes person and its relation data.
+### Deletes person and its relation data.
 ```
 http://persons.local/api/destroy/{person}
 Type: GET
