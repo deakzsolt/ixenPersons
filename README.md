@@ -39,13 +39,13 @@ When the migration is done we need to populate the database with example data, f
 ```
 php artisan db:seed
 ```
-## Person database UI
+## Persons database UI
 
 Visiting the home page of persons.local you can get a list of persons. There is a option to add, edit and delete.
 
 ## Api requests
 
-Returns all person data. Type GET request
+Returns all person data.
 ```
 http://persons.local/api/list
 Type: GET
@@ -219,18 +219,43 @@ Example:
   },
 ]
 ```
-Creates person. Type POST request
+Creates new person with data.
 ```
 http://persons.local/api/create
 Type: POST
-Response: bool
+Response: JSON Array
+Success example:
+{
+    "id": 21,
+    "first_name": "Valkyr",
+    "middle_name": null,
+    "last_name": "McManus",
+    "permanent_address": "1234 Citty Street 1",
+    "temporary_address": null,
+    "created_at": "2023-11-16T08:50:15.000000Z",
+    "updated_at": "2023-11-16T08:50:15.000000Z",
+    "person_emails": [],
+    "person_mobiles": [],
+    "person_telephones": []
+}
+
+Error example:
+{
+    "errors": {
+        "last_name": [
+            "The last name field is required."
+        ]
+    },
+    "status": 400
+}
 ```
 Returns single person data.
+In the request {person} expects person id.
 ```
-http://persons.local/api/edit/13
+http://persons.local/api/edit/{person}
 Type: GET
 Response: JSON Array
-Example:
+Success example:
 {
   "id": 1,
   "first_name": "Jarrell",
@@ -296,20 +321,94 @@ Example:
     }
   ]
 }
+
+On missing person example:
+{
+  "message": "Record not found."
+}
 ```
 Updates single person data.
+In the request {person} expects person id.
+Response is the updated person data.
 ```
-http://persons.local/api/update/13
+http://persons.local/api/person/update/{person}
 Type: POST
-Response: bool
+Response: JSON Array
+Success example:
+{
+    "id": 1,
+    "first_name": "Jarrell",
+    "middle_name": "Cielo",
+    "last_name": "Buckridge",
+    "permanent_address": "923 King Mews\nLake Arnulfo, AK 84647-6742",
+    "temporary_address": "5933 Champlin Field\nNorth Veronicabury, AL 84742-5574",
+    "created_at": "2023-11-15T19:25:59.000000Z",
+    "updated_at": "2023-11-15T19:25:59.000000Z",
+    "person_emails": [
+        {
+            "id": 1,
+            "person_id": 1,
+            "email": "jovany.gorczany@example.com",
+            "created_at": "2023-11-15T19:25:59.000000Z",
+            "updated_at": "2023-11-15T19:25:59.000000Z"
+        }
+    ],
+    "person_mobiles": [
+        {
+            "id": 1,
+            "person_id": 1,
+            "mobile_number": "+3670336413",
+            "created_at": "2023-11-15T19:25:59.000000Z",
+            "updated_at": "2023-11-15T19:25:59.000000Z"
+        },
+        {
+            "id": 2,
+            "person_id": 1,
+            "mobile_number": "+3630995198",
+            "created_at": "2023-11-15T19:25:59.000000Z",
+            "updated_at": "2023-11-15T19:25:59.000000Z"
+        }
+    ],
+    "person_telephones": [
+        {
+            "id": 1,
+            "person_id": 1,
+            "telephone_number": "+361695102",
+            "created_at": "2023-11-15T19:25:59.000000Z",
+            "updated_at": "2023-11-15T19:25:59.000000Z"
+        },
+        {
+            "id": 2,
+            "person_id": 1,
+            "telephone_number": "+361231748",
+            "created_at": "2023-11-15T19:25:59.000000Z",
+            "updated_at": "2023-11-15T19:25:59.000000Z"
+        }
+    ]
+}
+
+Error example:
+{
+    "errors": {
+        "last_name": [
+            "The last name field is required."
+        ]
+    },
+    "status": 400
+}
 ```
 Deletes person and its relation data.
 ```
-http://persons.local/api/destroy/9
+http://persons.local/api/destroy/{person}
 Type: GET
 Response: bool
-Example:
+Success example:
 {
   "success": true
+}
+
+On missing person example:
+{
+  "message": "Record not found."
 }
 ```

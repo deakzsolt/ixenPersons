@@ -72,28 +72,34 @@ class PersonController extends Controller
 
         if (isset($personData['email'])) {
             foreach ($personData['email'] as $email) {
-                $personEmail = new PersonEmail();
-                $personEmail->person_id = $this->person->id;
-                $personEmail->email = $email;
-                $personEmail->save();
+                if ($email) {
+                    $personEmail = new PersonEmail();
+                    $personEmail->person_id = $this->person->id;
+                    $personEmail->email = $email;
+                    $personEmail->save();
+                } // if
             } // foreach
         } // if
 
         if (isset($personData['mobile_number'])) {
             foreach ($personData['mobile_number'] as $mobile) {
-                $personMobile = new PersonMobile();
-                $personMobile->person_id = $this->person->id;
-                $personMobile->mobile_number = $mobile;
-                $personMobile->save();
+                if ($mobile) {
+                    $personMobile = new PersonMobile();
+                    $personMobile->person_id = $this->person->id;
+                    $personMobile->mobile_number = $mobile;
+                    $personMobile->save();
+                } // if
             } // foreach
         } // if
 
         if (isset($personData['telephone_number'])) {
             foreach ($personData['telephone_number'] as $telephone) {
-                $personTelephone = new PersonTelephone();
-                $personTelephone->person_id = $this->person->id;
-                $personTelephone->telephone_number = $telephone;
-                $personTelephone->save();
+                if ($telephone) {
+                    $personTelephone = new PersonTelephone();
+                    $personTelephone->person_id = $this->person->id;
+                    $personTelephone->telephone_number = $telephone;
+                    $personTelephone->save();
+                } // if
             } // foreach
         } // if
 
@@ -111,7 +117,6 @@ class PersonController extends Controller
         return view('pages.edit-person')->with(compact('person'));
     }
 
-
     public function update(PersonRequest $request, Person $person)
     {
         $personData = $request->all();
@@ -121,7 +126,7 @@ class PersonController extends Controller
         if (isset($personData['email'])) {
             $person->personEmails()->delete();
             foreach ($personData['email'] as $email) {
-                if($email) {
+                if ($email) {
                     $personEmail = new PersonEmail();
                     $personEmail->person_id = $person->id;
                     $personEmail->email = $email;
